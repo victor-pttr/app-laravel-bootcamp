@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -35,4 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+// Endpoint's of MassageController
+
+Route::resource('message', MessageController::class)
+        ->only(['index', 'store'])
+        ->middleware(['auth', 'verified']);
+
+
+
+// Require AUTH
 require __DIR__.'/auth.php';
